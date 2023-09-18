@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Pasos para subir a github 
+
+1 - git status   (para ver lo que vamos a subir)
+2 - git add .    ( el . indica que va a subir todo lo pendiente sin discriminar, en caso de solo querer subir un archivo, se reemplaza el . por el nombre del archivo deseado)
+3 - git commit -m "Titulo del commit" 
+4 - git push
