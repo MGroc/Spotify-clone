@@ -4,6 +4,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { MediaPlayerComponent } from './components/media-player/media-player.component';
 import { HeaderUserComponent } from './components/header-user/header-user.component';
 import { RouterModule } from '@angular/router';
+import { CardPlayerComponent } from './components/card-player/card-player.component';
+import { SectionGenericComponent } from './components/section-generic/section-generic.component';
 
 
 
@@ -11,7 +13,9 @@ import { RouterModule } from '@angular/router';
   declarations: [
     SideBarComponent,
     MediaPlayerComponent,
-    HeaderUserComponent
+    HeaderUserComponent,
+    CardPlayerComponent,
+    SectionGenericComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +24,9 @@ import { RouterModule } from '@angular/router';
   exports: [
     SideBarComponent,
     MediaPlayerComponent,
-    HeaderUserComponent
+    HeaderUserComponent,
+    CardPlayerComponent,
+    SectionGenericComponent
   ]
 })
 export class SharedModule { }
