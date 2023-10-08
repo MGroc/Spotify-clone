@@ -5,8 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path:'',
-    component: TrackPageComponent,
-    // outlet: 'child'
+    component: TrackPageComponent
   }
 ];
 
