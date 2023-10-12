@@ -1,0 +1,72 @@
+<!-- <p>admin-page works!</p> -->
+<label class="lbl-title">{{lblButton}} Cancion:</label>
+<form (ngSubmit)="executeABM()" [formGroup]="formAdmin">
+    <div class="row">
+      <div class="col-md-3">
+        <label>Cancion </label>
+        <input type="text" formControlName="name" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label>Album</label>
+        <input type="text" formControlName="album" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label>Cover</label>
+        <input type="text" formControlName="cover" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label>Artista</label>
+        <input type="text" formControlName="artist" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label>id</label>
+        <input type="text" formControlName="uid" class="form-control">
+        <!-- Agregar disabled -->
+      </div>
+    </div>
+    <br>
+  <button [disabled]="formAdmin.invalid" class="btn btn-primary">{{lblButton}}</button>
+</form>
+
+<br>
+
+
+
+<label class="lbl-title">Agregar, Borrar, Modificar canciones</label>
+
+<div class="play-list-body">
+    <ul class="play-list-table-header">
+        <li>Nombre</li>
+        <li>Album</li>
+        <li>Eliminar</li>
+        <li>Editar</li>
+    </ul>
+    <ul class="play-list-rows" *ngFor="let track of tracks">
+        <li class="track-name">
+            <ng-container *ngTemplateOutlet="coverSection;context:{track:track}"></ng-container>
+        </li>
+        <li class="track-name-opacity">
+            {{track.album}}
+        </li>
+        <li class="track-name-opacity" >
+            <button (click)="selectTrack(0, track)">Eliminar</button>
+        </li>
+        <li class="track-name-opacity">
+            <button (click)="selectTrack(1, track)">Editar</button>
+        </li>
+
+    </ul>
+</div>
+
+<!--template del cover-->
+<ng-template #coverSection let-track="track">
+
+    <div class="cover-section">
+        <img appImgBroken class="cover-track" [src]="track.cover" [alt]="track.name">
+        <div class="cover-info">
+            <div class="name-track">{{track.name}}</div>
+            <div class="name-track-details">{{track.artist.name}}</div>
+        </div>
+    </div>
+
+</ng-template>

@@ -55,9 +55,9 @@ export class MultimediaService {
   }
 
   private calculateTime = () =>  {
-    console.log('Disparando evento')
+    // console.log('Disparando evento')
     const {duration, currentTime} = this.audio
-    console.table ([duration, currentTime])
+    // console.table ([duration, currentTime])
     this.setTimeElapsed(currentTime)
     this.setTimeRemaining(currentTime, duration)
     this.setPercentage(currentTime, duration)

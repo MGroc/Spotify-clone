@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
+import { TrackService } from '@modules/tracks/services/track.service';
 
 @Component({
   selector: 'app-play-list-body',
@@ -9,10 +10,15 @@ import { TrackModel } from '@core/models/tracks.model';
 export class PlayListBodyComponent implements OnInit {
   @Input() tracks: TrackModel[] = []
   optionSort: {property:string | null, order: string} = {property: null, order: 'asc'}
-  constructor() {}
+  
+  
+  constructor(private trackService: TrackService) {}
 
   ngOnInit(): void {
-
+    this.trackService.getAllTracks$()
+    .subscribe((response: TrackModel[]) => 
+      this.tracks = response
+    )
   }
 
   changeSort(property: string): void {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-side-bar',
@@ -15,14 +16,14 @@ export class SideBarComponent implements OnInit {
   
   customOptions: Array<any> = []
 
-  constructor(private router:Router) {}
+  constructor(private router:Router, private cookieService:CookieService) {}
 
   ngOnInit(): void {
     this.mainMenu.defaultOptions = [
       {
         name: 'Home',
         icon: 'uil uil-estate',
-        router: ['/', 'auth']
+        router: ['/', 'tracks']
       },
       {
         name: 'Buscar',
@@ -32,8 +33,8 @@ export class SideBarComponent implements OnInit {
       {
         name: 'Tu biblioteca',
         icon: 'uil uil-chart',
-        router: ['/', 'favorites'],
-        query: { hola: 'mundo' }
+        router: ['/', 'favorites']
+        // query: { hola: 'mundo' }
       }
     ]
 
@@ -66,18 +67,32 @@ export class SideBarComponent implements OnInit {
         router: ['/']
       }
     ]
-
+    
+    this.checkAdmin()
   }
 
   goTo($event: any):void {
     this.router.navigate(['/', 'favorites'],{
       queryParams:{
-        key1: 'value1',
-        key2: 'value2',
-        key3: 'value3'
+        // key1: 'value1',
+        // key2: 'value2',
+        // key3: 'value3'
       }
     })
     console.log($event)
   }
+
+  checkAdmin() {
+    const item = {
+      name: 'Admin',
+      icon: 'uil uil-sitemap',
+      router: ['/', 'admin']
+    }
+    const cookieValue = this.cookieService.get('role')
+    if (cookieValue == 'admin') {
+      this.mainMenu.defaultOptions.push(item)
+    }
+  }
+
 }
 

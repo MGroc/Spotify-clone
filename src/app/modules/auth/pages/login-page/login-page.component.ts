@@ -42,7 +42,12 @@ export class LoginPageComponent implements OnInit {
     .subscribe(responseOk => {
       console.log('Sesion iniciada correcta', responseOk)
       const { tokenSession, data } = responseOk
-      this.cookie.set('token', tokenSession, 4, '/')
+      const now = new Date()
+      const expires = new Date(now.getTime() + 1 * 3600 * 1000);
+      
+      // console.log(expires)
+      this.cookie.set('token', tokenSession, expires, '/')
+      this.cookie.set('role', data.role, expires, '/')
       this.router.navigate(['/', 'tracks'])
     },
     err => {

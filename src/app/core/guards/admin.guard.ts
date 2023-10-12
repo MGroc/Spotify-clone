@@ -1,32 +1,31 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { CookieOptions, CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SessionGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
-  constructor(private cookieService: CookieService, private router: Router) {
-
-  }
+  constructor(private cookieService: CookieService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.checkCookieSession();
+    return this.isAdmin();
   }
 
-  checkCookieSession(): boolean {
+  isAdmin(): boolean {
     try {
 
-      const token: boolean = this.cookieService.check('token')
-      console.log('🆗🆗🆗🆗', token)
-      if(!token){
-        this.router.navigate(['/','auth'])
+      const role: string = this.cookieService.get('role')
+      console.log('role: ', role)
+      if(role !== 'admin'){
+        this.router.navigate(['/'])
+        // return false
       }
-      return token;
+      return true;
 
     } catch(e){
       
@@ -34,6 +33,7 @@ export class SessionGuard implements CanActivate {
       return false
 
     }
+
   }
   
 }
